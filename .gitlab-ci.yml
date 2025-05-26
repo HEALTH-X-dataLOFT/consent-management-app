@@ -1,0 +1,153 @@
+stages:
+  - test
+  - build
+  - upload
+  - release
+
+variables:
+  PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/CMA/${CI_COMMIT_TAG}"
+
+code_quality:
+  stage: test
+  image: "ghcr.io/cirruslabs/flutter:3.22.3"
+  before_script:
+    - flutter pub global activate dart_code_metrics
+    - export PATH="$PATH:$HOME/.pub-cache/bin"
+  script:
+    - metrics lib -r codeclimate  > gl-code-quality-report.json
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+
+test:
+  stage: test
+  image: "ghcr.io/cirruslabs/flutter:3.22.3"
+  before_script:
+    - flutter pub global activate junitreport
+    - export PATH="$PATH:$HOME/.pub-cache/bin"
+  script:
+    - flutter test --machine --coverage | tojunit -o report.xml
+    - lcov --summary coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines\.*: \d+\.\d+\%/'
+  artifacts:
+    name: coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+    reports:
+      junit: report.xml
+
+lint:
+  stage: test
+  image: "ghcr.io/cirruslabs/flutter:3.22.3"
+  script: flutter analyze lib test
+
+# Check that arb file is alphabetically sorted
+lint-arb-sorted:
+  stage: test
+  needs: []
+  image: "ghcr.io/cirruslabs/flutter:3.22.3"
+  script:
+    - flutter pub get
+    # Not properly configured in base image
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - find localization -name "*.arb" -exec dart run arb_utils sort {} \;
+    # Error status code when file has changed
+    - git diff --exit-code localization/*.arb
+
+.build:
+  stage: build
+  image: "ghcr.io/cirruslabs/flutter:3.22.3"
+  before_script:
+    - flutter pub get
+    - flutter clean
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+
+.build_release:
+  extends: .build
+  rules:
+    - if: "$CI_COMMIT_TAG =~ /release/"
+  
+
+build_android_staging:
+  extends: .build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - flutter build apk --dart-define-from-file .secure_files/staging.env
+  artifacts:
+    paths:
+      - build/app/outputs/apk/release/app-release.apk
+    expire_in: 1 week
+
+build_android_production:
+  extends: .build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - flutter build apk --dart-define-from-file .secure_files/prod.env
+  artifacts:
+    paths:
+      - build/app/outputs/apk/release/app-release.apk
+    expire_in: 1 week
+
+build_android_production_web_release:
+  extends: .build_release
+  environment: production_web
+  script:
+    - flutter build apk --dart-define-from-file .secure_files/prod_web.env
+    - mkdir release
+    - mv build/app/outputs/apk/release/app-release.apk release/app-$CI_COMMIT_TAG-web.apk
+  artifacts:
+    paths:
+      - release/app-$CI_COMMIT_TAG-web.apk
+
+build_android_production_nfc_release:
+  extends: .build_release
+  environment: production_nfc
+  script:
+    - flutter build apk --dart-define-from-file .secure_files/prod_nfc.env
+    - mkdir release
+    - mv build/app/outputs/apk/release/app-release.apk release/app-$CI_COMMIT_TAG-nfc.apk
+  artifacts:
+    paths:
+      - release/app-$CI_COMMIT_TAG-nfc.apk
+
+build_android_production_study_release:
+  extends: .build_release
+  environment: production_study
+  script:
+    - flutter build apk --dart-define-from-file .secure_files/prod_study.env
+    - mkdir release
+    - mv build/app/outputs/apk/release/app-release.apk release/app-$CI_COMMIT_TAG-study.apk
+  artifacts:
+    paths:
+      - release/app-$CI_COMMIT_TAG-study.apk
+
+upload-release-apk_release:
+  stage: upload
+  image: curlimages/curl:latest
+  rules:
+    - if: "$CI_COMMIT_TAG =~ /release/"
+  script:
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file release/app-$CI_COMMIT_TAG-web.apk ${PACKAGE_REGISTRY_URL}/app-$CI_COMMIT_TAG-web.apk
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file release/app-$CI_COMMIT_TAG-nfc.apk ${PACKAGE_REGISTRY_URL}/app-$CI_COMMIT_TAG-nfc.apk
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file release/app-$CI_COMMIT_TAG-study.apk ${PACKAGE_REGISTRY_URL}/app-$CI_COMMIT_TAG-study.apk
+
+release:
+  # Caution, as of 2021-02-02 these assets links require a login, see:
+  # https://gitlab.com/gitlab-org/gitlab/-/issues/299384
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: "$CI_COMMIT_TAG =~ /release/"
+  script:
+    - |
+      release-cli create --name "Release $CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG \
+        --description VERSIONS_RELEASE_NOTES.md \
+        --assets-link "{\"name\":\"app-$CI_COMMIT_TAG-web.apk\",\"url\":\"${PACKAGE_REGISTRY_URL}/app-$CI_COMMIT_TAG-web.apk\"}" \
+        --assets-link "{\"name\":\"app-$CI_COMMIT_TAG-nfc.apk\",\"url\":\"${PACKAGE_REGISTRY_URL}/app-$CI_COMMIT_TAG-nfc.apk\"}" \
+        --assets-link "{\"name\":\"app-$CI_COMMIT_TAG-study.apk\",\"url\":\"${PACKAGE_REGISTRY_URL}/app-$CI_COMMIT_TAG-study.apk\"}" 

@@ -1,0 +1,74 @@
+{
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://schema.org"
+    ],
+    "id": "did:web:to_be_defined_later",
+    "type": [
+        "VerifiablePresentation"
+    ],
+    "verifiableCredential": [
+        {
+            "expirationDate": "2029-01-09T13:20:55Z",
+            "credentialSubject": {
+                "id": "did:web:root_credential_subject_id"
+            },
+            "proof": {
+                "created": "2024-06-19T13:26:10.148632489Z",
+                "proofValue": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJHelFPdnpjR0h0a1JwUjRZd1ZyMjgxaGhaaTl4VTlVQzVCYVR3LWlEMDdnIiwieSI6InFoNHhHNDVlTDZ0U2VQU044Y3oyTmZHRVo1UzdNaDBTT3hTaWdvQlByX28ifX0.fYOZRr2XM8_NJrFmmSqDCn5G6aj6nNhM6duaTS5KU-7biiVyfGU9OA.0D7iptyZlFijj6sg.4xoa7DRbYb4NjKLpt74dHmnzIGW7uayUNTmv6FBNcu8V6YW-swY74O3Shc8lTEtyJut91jaNGGZ-Qyj5W9fkuBCldhdbXte9dYIxV2lLfuBe35BXIpTFOCiogOKuwgzj0GVtpnPeL-bAgz0n5DGU0qQ5MQVEMvlhc4iHvblEMVRIJKoOGdpZO5mDNxsST89kViB9gOAsBZy-GRTzYtKl0FZ3oShwIljJ_GKT1lfLGBCZOQSUZ0EI4HnW9PWv9xxxieZio5uahlWZboArU0CVahSy-Xc7bcdG1vrMgphrndzSJDlUYQZYI40S1sGfv78BBnlsRDUKn6M_wsWxYmDbkFE_InOYWpsgq6EXvlsXHSB3YXzstGk2NMSZ6qIplm1GaQVsnUZWmSVZQYAS6oZkWNEv9YoBO68FRR3UzioaMBS7fJ4rWr7_AMgwqpsUCUZwmXtNiZDylmYQUpSjk7JCjEowW4diRjOfy7P49VkzMR5O-geaqikRp-qrAq6gREs_tjFtqB4v7Ie5aHvYDQY7Ykjd-08zcnExfLZGIOE-fBIONSUYw76aZdQErLWHySsq4ygNNB7MJcz4jwJrZT6PY_h4uXwu2IqtfZhxr8IdOWldwzE4BbgX6xbuQM20BEUY7Loueh0s9dhn7CuFlMMgPbbfU8LMw0_QuGFlBMtudKHG6V6mbGzzYFmV_PsEdGYRo0aV5q5KKEp47jGicSAHRIhnWKaHc-QJQwJB762JTba0PUybL0tE03AfCrUTEZ97KyuH-4i-TKuiQTzSIpocSmO2qeszPEFV39AmqIliYg.FHPaGO7pS6jIK7V8ZLd0sQ",
+                "proofPurpose": "assertionMethod",
+                "type": "JsonWebEncryption",
+                "verificationMethod": "did:web:root_verification_method"
+            },
+            "issuanceDate": "2024-06-19T13:26:10.142900002Z",
+            "issuer": "did:web:root_issuer",
+            "type": [
+                "VerifiableCredential",
+                "RootVc"
+            ],
+            "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://schema.org"
+            ]
+        },
+        {
+            "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://schema.org"
+            ],
+            "type": [
+                "VerifiableCredential",
+                "ProviderVc"
+            ],
+            "issuer": "did:web:provider_issuer",
+            "issuanceDate": "2023-08-16T05:21:24.651387237Z",
+            "expirationDate": "2024-01-02T15:04:05Z",
+            "credentialSubject": {
+                "id": "12345",
+                "name": "providername"
+            },
+            "proof": {
+                "created": "2023-08-16T05:35:21.715085427Z",
+                "proofValue": "eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00ifQ.aaa.bbb",
+                "proofPurpose": "assertionMethod",
+                "type": "JsonWebSignature",
+                "verificationMethod": "did:web:provider_verification_method"
+            }
+        },
+        {
+            "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://schema.org"
+            ],
+            "type": [
+                "VerifiableCredential",
+                "PassphraseVc"
+            ],
+            "issuer": "did:web:passphrase_issuer",
+            "issuanceDate": "2023-08-16T05:21:24.651387237Z",
+            "credentialSubject": {
+                "passphrase": "d42db349-a847-4f52-9b33-cea46a78f27c"
+            }
+        }
+    ]
+} 

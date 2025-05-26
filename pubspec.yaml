@@ -1,0 +1,90 @@
+name: consent_management_app
+description: The Consent Management App (CMA) is intended to be a mobile application that allows users to manage their personal healthcare data.
+
+# Prevent accidental publishing to pub.dev.
+publish_to: "none"
+
+version: 1.2.2+2
+
+environment:
+  sdk: ">=3.1.1 <4.0.0"
+
+dependencies:
+  flutter_breadcrumb: ^1.0.1
+  auto_size_text: ^3.0.0
+  auto_route: 9.2.0
+  cross_file: ^0.3.3+5
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_secure_storage: ^9.0.0
+  flutter_secure_file_storage: ^1.1.0
+  fluttertoast: ^8.2.2
+  intl: ^0.19.0
+  local_auth: ^2.3.0
+  logger: ^2.0.2
+  open_filex: ^4.3.2
+  path_provider: ^2.1.1
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  openapi_generator_annotations: ^5.0.2
+  dwa_backend_api:
+    path: ./api/dwa_backend_api
+  built_collection: ^5.1.1
+  dio: ^5.3.3
+  flutter_markdown: ^0.7.3+1
+  after_layout: ^1.2.0
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  card_swiper: ^3.0.1
+  thumbnailer: ^2.2.0
+  flutter_svg: ^2.0.10+1
+  responsive_sizer: ^3.3.1
+  oidc: ^0.7.0
+  oidc_default_store: ^0.2.0+9
+  oidc_core: ^0.7.0
+  shared_preferences: ^2.3.2
+  jose_plus: ^0.4.6
+  mockito: ^5.4.4
+  http: ^1.2.2
+  connectivity_plus: ^6.0.5
+  google_fonts: ^6.2.1
+  nfc_manager: ^3.5.0
+  mobile_scanner: ^6.0.1
+  appcheck: ^1.5.2
+  url_launcher: ^6.3.1
+  skeletonizer: ^1.4.2
+  grouped_list: ^6.0.0
+  pdfrx: ^1.0.94
+  photo_view: ^0.14.0
+  vector_graphics: ^1.1.18
+  flutter_bloc: ^9.0.0
+  equatable: ^2.0.7
+  image_magick_q16:
+    path: vendor/im
+  rxdart: ^0.27.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+  auto_route_generator: 9.0.0
+  build_runner: ^2.4.6
+  openapi_generator: ^5.0.2
+  arb_utils: ^0.8.3
+
+flutter:
+  uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  assets:
+    # Add assets from the images directory to the application.
+    - path: assets/images/svg/
+      transformers:
+        - package: vector_graphics_compiler
+    - path: assets/google_fonts/
+    - path: assets/images/

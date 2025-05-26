@@ -1,0 +1,35 @@
+{
+    "type": [
+        "VerifiablePresentation"
+    ],
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://schema.org"
+    ],
+    "id": "did:web:presentation_id",
+    "verifiableCredential": [
+        {
+            "expirationDate": "2024-06-19T14:00:13.4659468Z",
+            "credentialSubject": {
+                "id": "did:web:root_credential_subject_id"
+            },
+            "proof": {
+                "created": "2024-06-19T13:50:13.4659468Z",
+                "proofValue": "eyJhbGciOiJFQ0RILUVTK0EyNTZLVyIsImVuYyI6IkEyNTZHQ00iLCJlcGsiOnsiY3J2IjoiUC0yNTYiLCJrdHkiOiJFQyIsIngiOiJHS1J4SlkwUGVRYWwwY0QwYnJiNGV3WFF0dHNhR2FNY0FqN1RPZGxLd01rIiwieSI6IlIycWs0VEpMSm00dzhHTGxJTVBDbERibHRtU19WV21CQXJFSno2Q0hqX0EifX0.Ul0wPYJ3UW8i-U7gMprkvN9lBMzVQRJ4LbG0bnYtEzhp4U0nLnRtYA.TXFLbtDhU2oalroh.SGR9-FfU3tukgawB9_KqipcZeqMJHv7fjXpCdmLz60evFh5u0LY5dW5h3cOXl1VSIcEM62YN0vrCtYY5pG0JgFrZkNKKlIvaJkhnaPJ1BEsZH5pWgroKgt3UR7cYTQwlVPPjC1irpdiA76GOWWyrWOBJAaJQL1gW9EX1DkWC2MqdvNxRjkSFOJo9CZkOZCBfBW3hPqAROvF-2rA--R_qY0LXZvUKmnQ36y44YjyzfFwK-4K7LAxuY09swxxVvt1mkknvtnf7ymBbrJvhhMlkeSmMGU2VYd1mmKyXcntdfNbdJ9TeKnhb8u_f6zIW3kgPJdwAd2WJ9yJdRXodFXyz0RWD0xonuhm9RT6K1kUcj19vHM3rNcnDkRZAGrb-nsaO3cBdC4aS6IVtAuvSsbD3_ZSUm-kW-mLeCujbGvyzq3hcE-oADhXhaeUqnJ6cNEARpIFo7Dj9ZyKsmIPSyHnkV8F8Um9vHYMKMR_QdtSW6c4L6hI17BovA9ngiJQn_qwInBqfkcb10uRjQm1QkdwoyCcY_m2GZPN425oiLiF1pauK6sqqJ01y__6Ao486E_0D6AhyociccCHX3owU3xFNaXqWVN504D10MxqMEHpr98wJ7p2Q4RPuPmwVRmdBBpWxdLAk5m3KvSy3qOpTRl1r1ARn-KlfEesSxF_mz_a7-1KqFpSjwYeEASR-JtoHoasdN6nMwuftsLANDL7rGGGZN8xmyRKhj4h0TTJnK9GMZSj8-pBPtmznrBXJk5PRNMV9oowK-4O2KQiWWuB1ub8GMxEyAzU-3fQ9KkCEBR9lL8SA6NWb0ovIdbyqyc3Tyt_DFVg6lJi3wmTTxoD_ffy3wEftP4BjdvV6NmTFvFSQ2G_O1OcR5xeAWlvS8NqWuDn4rappLkgNHy9XlJheeV_-fgeCEa_QrvC1JRx99UllfmhI8Aa15eG_gY66KQcgnIShsOXHt4lvQ89l4K3aT6qLWBs91yqAwFDDNOCY1blG79aH3SS-vygeI7AxPqiwmWZa7QS9sssbVnTPLOeR5d4-WbBiAS9Hgv4_yYrmdlB_VIVoMT-ND9dfPj265w8nilZK56egsRClY5nE6nxuHUrAvRhI31rMuSZrP5bgKMowKpRecilCYveyarVUdytmFVWGaoZ1GNxMJHRM_os-fNK3xWjSAXo8oiBgHWLayxSBT8EwjZ-Nr3cz2F0_uh4HrwP1SdpkT57eZgEff_mvga_rZ5r4nR6PktZtzyVajazOWseQPyBd3DgfqVpe-jwisEwS5uctIXK1cX_IgbBumWRWtqRll4QwvQhBeaqxWftvK3hjAIe3eWNCDAHvpvRD4Q8IbB3ztAuFZwcFqtkhPtf36TX-FzsS3NJCLyy-Y_nyQcxj37auI3ZQWfzpY6IQ3skHHJRfxhrVm63L0wtFXZxckf95Wne9VCrJe_YSQZnH4-rldFYASZzp0qCmM9YgNT0WVVWQLSTgL91HYswhLpedm-a6Axqb9L14YmIckCple_HXwgleQl-7wvQ8AnQi1JhMWYnLaFhI9ifFxdqFb1M0n_UcHtcEqJLvuNpJUB9QoK4X7azrPMKcbibKHIoxdSJ4pu0Bs3GbzH8Z6gaJKKAbpxqAA-oibQch.IYmvXXM4xQSkqw_dH-hTLQ",
+                "proofPurpose": "assertionMethod",
+                "type": "JsonWebEncryption",
+                "verificationMethod": "did:web:root_verification_method"
+            },
+            "issuanceDate": "2024-06-19T13:50:13.4659468Z",
+            "issuer": "did:web:root_issuer",
+            "type": [
+                "VerifiableCredential",
+                "OneTimeTokenVc"
+            ],
+            "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://schema.org"
+            ]
+        }
+    ]
+}
